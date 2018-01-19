@@ -1,0 +1,79 @@
+#!/usr/bin/env bash
+#
+# If a custom Node version is not already defined, we look
+# for a Node version semver expressing in the current tree's .nvmrc
+# If we find a fixed version, we print it out.  If we find a range we
+# test the installed versions against that range and print the
+# greatest matching version.
+
+
+# Setup for relative includes. Adapted from:
+# http://www.ostricher.com/2014/10/the-right-way-to-get-the-directory-of-a-bash-script/
+# http://stackoverflow.com/a/12694189/407845
+get_script_dir() {
+  local dir
+  local src="${BASH_SOURCE[0]}"
+
+  # while $src is a symlink, resolve it
+  while [ -h "$src" ]; do
+    dir="${src%/*}"
+    src="$( readlink "$src" )"
+
+    # If $src was a relative symlink (so no "/" as prefix),
+    # need to resolve it relative to the symlink base directory
+    [[ $src != /* ]] && src="$dir/$src"
+  done
+  dir="${src%/*}"
+
+  if [ -d "$dir" ]; then
+    echo "$dir"
+  else
+    echo "$PWD"
+  fi
+}
+
+find_nvmrc_path() {
+  local root="$1"
+  while [ -n "$root" ]; do
+    if [ -e "${root}/.nvmrc" ]; then
+      echo "${root}/.nvmrc"
+      exit
+    fi
+    root="${root%/*}"
+  done
+}
+
+should_find_in_nvmrc() {
+  [ -z "$(nodenv local 2>/dev/null)" ]
+}
+
+version_from_nvmrc() {
+  local version_expression="$(cat "$NVMRC_PATH")"
+
+  local -a installed_versions
+  if [[ -n "$version_expression" ]] ; then
+    while IFS= read -r v; do
+      installed_versions+=( "$v" )
+    done < <(nodenv versions --bare)
+
+    version=$("$SEMVER" -r "$version_expression" "${installed_versions[@]}" \
+      | tail -n 1)
+    if [[ -n "$version" ]] ; then
+      echo "$version"
+    else
+      echo "$version_expression"
+      exit 1
+    fi
+  fi
+}
+
+DIR="$(get_script_dir)"
+SEMVER="$DIR/../node_modules/sh-semver/semver.sh"
+
+if should_find_in_nvmrc; then
+  NVMRC_PATH=$(find_nvmrc_path "$PWD")
+
+  if [ -e "$NVMRC_PATH" ]; then
+    version_from_nvmrc
+  fi
+fi
