@@ -1,2 +1,11 @@
 language: node_js
 node_js: node
+deploy:
+  provider: releases
+  file: artifacts/*
+  file_glob: true
+  skip_cleanup: true
+  overwrite: true
+  on:
+    repo: ouchxp/nodenv-nvmrc
+    tags: true
