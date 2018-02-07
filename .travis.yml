@@ -2,6 +2,8 @@ language: node_js
 node_js: node
 deploy:
   provider: releases
+  api_key:
+    secure: Lhpcdvjk89FNFNGrabVtziLkixRclEIYZhJFkqXx0pLtzb0BGOdQjL2IH9mqrNTAzkwTHajH3xGF6Q/u+x1QD2XBh1HF/YflqPxjwPLCE752itllLdQ0LUllDw7B/ZnZXsoT0QT90+Jb1VVA9F75sbCYD/NOpZsL5rCmm4m+oYP5DLN2Qq051i+yx5LZp/kDv1u+F8SA5hU/uL9i+sl0/xc8xqTEvZ82HyhhBh2R7LH9kk7yiy3vxgwOURr4jVLVhRg4pAVeu6kcuCHP2yKeEdCoiRt5BW1iMqo3qBhZWZVCyBOtcBrjWe+pDSa3qJ7JxNXOIWJa8smzUF09rSa61JDZ2G8jP9fM+lgFQ430pbB6sBA3lOGUfS09X9o/+C4VBnXWhBPq4ctZIMjN35ax1O20ff3TzGVTNsb1/fnBEhAS+e/VQwdfKba/LnQ5Bgn9i0fHeTuPInb+Kib0u+XrIbl6T+GjbH9JjRfbbx4f5SSu8k/3S28QD/tB6ZDQg0gnzmuIIA1/Cc8Mn0Qz64LAT6ApeXvtGL3h5qOG+IxSY8u0UF1fUOpE9Z2qV1p1+ES6bgzTIMSrpx1PQpkTxGq7ukUycgmu0dBloMDC7RwNhNp0G2NXDeKVHfeN5sEWtG5XZuJFQdhG0OglsxZLKjd9LdFF9Z5oZ5H2GSp8R9CEqYk=
   file: artifacts/*
   file_glob: true
   skip_cleanup: true
