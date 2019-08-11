@@ -62,7 +62,6 @@ version_from_nvmrc() {
       echo "$version"
     else
       echo "$version_expression"
-      exit 1
     fi
   fi
 }

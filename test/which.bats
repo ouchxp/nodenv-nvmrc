@@ -12,12 +12,13 @@ load test_helper
 @test 'Exits with error when node version in .nvmrc is not installed' {
   cd_into_dir 4.2.1
   run nodenv which node
-  assert echo "$output" | grep 'no version satisfying'
   assert [ "$status" -eq 1 ]
+  assert [ "$output" = "nodenv: version "'`'"4.2.1' is not installed (set by /tmp/example_dir/.nvmrc)" ]
 }
 
 @test 'Exits with error when no node version matching a range is installed' {
   cd_into_dir "4.0 - 5.0"
   run nodenv which node
   assert [ "$status" -eq 1 ]
+  assert [ "$output" = "nodenv: version "'`'"4.0 - 5.0' is not installed (set by /tmp/example_dir/.nvmrc)" ]
 }

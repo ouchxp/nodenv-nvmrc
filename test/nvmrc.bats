@@ -29,7 +29,7 @@ load test_helper
   cd_into_dir '>= 4.0.0'
   run nodenv nvmrc
   assert [ "$output" = '>= 4.0.0' ]
-  assert [ "$status" -eq 1 ]
+  assert [ "$status" -eq 0 ]
 }
 
 @test 'Prefers `nodenv local` over .nvmrc' {
