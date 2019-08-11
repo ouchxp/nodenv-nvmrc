@@ -2,11 +2,18 @@
 
 load test_helper
 
-@test 'Which recognizes node version in .nvmrc' {
+@test 'Which recognizes numeric node version in .nvmrc' {
   create_version 4.2.1
   cd_into_dir 4.2.1
   run nodenv which node
   assert_success "${NODENV_ROOT}/versions/4.2.1/bin/node"
+}
+
+@test 'Which recognizes string node version in .nvmrc' {
+  create_version lts
+  cd_into_dir lts
+  run nodenv which node
+  assert_success "${NODENV_ROOT}/versions/lts/bin/node"
 }
 
 @test 'Exits with error when node version in .nvmrc is not installed' {

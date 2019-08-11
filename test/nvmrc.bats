@@ -39,3 +39,11 @@ load test_helper
   run nodenv nvmrc
   assert_success ''
 }
+
+@test 'Returns version expression that is not semver version' {
+  create_version lts
+  cd_into_dir lts
+  run nodenv nvmrc
+  assert [ "$status" -eq 0 ]
+  assert_success 'lts'
+}
