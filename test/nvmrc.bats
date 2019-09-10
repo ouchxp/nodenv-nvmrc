@@ -29,7 +29,7 @@ load test_helper
   cd_into_dir '>= 4.0.0'
   run nodenv nvmrc
   assert [ "$output" = '>= 4.0.0' ]
-  assert [ "$status" -eq 1 ]
+  assert [ "$status" -eq 0 ]
 }
 
 @test 'Prefers `nodenv local` over .nvmrc' {
@@ -38,4 +38,12 @@ load test_helper
   nodenv local 5.0.0
   run nodenv nvmrc
   assert_success ''
+}
+
+@test 'Returns version expression that is not semver version' {
+  create_version lts
+  cd_into_dir lts
+  run nodenv nvmrc
+  assert [ "$status" -eq 0 ]
+  assert_success 'lts'
 }

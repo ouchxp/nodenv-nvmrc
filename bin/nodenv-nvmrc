@@ -53,7 +53,9 @@ version_from_nvmrc() {
   local -a installed_versions
   if [[ -n "$version_expression" ]] ; then
     while IFS= read -r v; do
-      installed_versions+=( "$v" )
+      if [[ $v =~ ^[0-9.]+$ ]] ; then
+        installed_versions+=( "$v" )
+      fi
     done < <(nodenv versions --bare)
 
     version=$("$SEMVER" -r "$version_expression" "${installed_versions[@]}" \
@@ -62,7 +64,6 @@ version_from_nvmrc() {
       echo "$version"
     else
       echo "$version_expression"
-      exit 1
     fi
   fi
 }
