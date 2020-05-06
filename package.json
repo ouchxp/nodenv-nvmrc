@@ -1,6 +1,6 @@
 {
   "name": "nodenv-nvmrc",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "private": true,
   "description": "Activate a nodenv node version from .nvmrc",
   "homepage": "https://github.com/ouchxp/nodenv-nvmrc#readme",
@@ -27,7 +27,7 @@
     "postversion": "git push --follow-tags && npm run publish:brew"
   },
   "devDependencies": {
-    "bats": "^0.4.2",
+    "bats": "^1.1.0",
     "brew-publish": "^2.0.0"
   },
   "dependencies": {

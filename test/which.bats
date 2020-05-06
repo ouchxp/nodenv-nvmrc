@@ -20,12 +20,12 @@ load test_helper
   cd_into_dir 4.2.1
   run nodenv which node
   assert [ "$status" -eq 1 ]
-  assert [ "$output" = "nodenv: version "'`'"4.2.1' is not installed (set by /tmp/example_dir/.nvmrc)" ]
+  assert [ "$output" = "nodenv: version "'`'"4.2.1' is not installed (set by ${BATS_TMPDIR}/example_dir/.nvmrc)" ]
 }
 
 @test 'Exits with error when no node version matching a range is installed' {
   cd_into_dir "4.0 - 5.0"
   run nodenv which node
   assert [ "$status" -eq 1 ]
-  assert [ "$output" = "nodenv: version "'`'"4.0 - 5.0' is not installed (set by /tmp/example_dir/.nvmrc)" ]
+  assert [ "$output" = "nodenv: version "'`'"4.0 - 5.0' is not installed (set by ${BATS_TMPDIR}/example_dir/.nvmrc)" ]
 }
