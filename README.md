@@ -17,13 +17,13 @@ $ git clone https://github.com/ouchxp/nodenv-nvmrc.git $(nodenv root)/plugins/no
 
 ### Installing with Homebrew
 
-Mac OS X users can install [many nodenv plugins](https://github.com/ouchxp/homebrew-nodenv) with [Homebrew](http://brew.sh).
+Mac OS X users can install [many nodenv plugins](https://github.com/nodenv/homebrew-nodenv) with [Homebrew](http://brew.sh).
 
 *This is the recommended method of installation if you installed nodenv with
 Homebrew.*
 
 ```sh
-$ brew tap ouchxp/nodenv
+$ brew tap nodenv/nodenv
 $ brew install nodenv-nvmrc
 ```
 
