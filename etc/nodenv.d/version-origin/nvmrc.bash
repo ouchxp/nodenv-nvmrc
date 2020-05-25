@@ -12,7 +12,9 @@ find_nvmrc_file() {
   return 1
 }
 
-if ! NODENV_NVMRC_VERSION=$(nodenv-nvmrc); then
+if [ -n "$NODENV_VERSION" ] && [ "$(nodenv-nvmrc)" != "$NODENV_VERSION" ]; then
+  NODENV_VERSION_ORIGIN="NODENV_VERSION environment variable"
+elif ! NODENV_NVMRC_VERSION=$(nodenv-nvmrc); then
   exit 1
 elif [ -n "$NODENV_NVMRC_VERSION" ]; then
   find_nvmrc_file "$NODENV_DIR"
