@@ -1,6 +1,6 @@
 {
   "name": "nodenv-nvmrc",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "private": true,
   "description": "Activate a nodenv node version from .nvmrc",
   "homepage": "https://github.com/ouchxp/nodenv-nvmrc#readme",
