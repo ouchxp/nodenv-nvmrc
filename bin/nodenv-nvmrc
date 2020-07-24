@@ -35,7 +35,9 @@ get_script_dir() {
 find_nvmrc_path() {
   local root="$1"
   while [ -n "$root" ]; do
-    if [ -e "${root}/.nvmrc" ]; then
+    if [ -e "${root}/.node-version" ]; then
+      exit
+    elif [ -e "${root}/.nvmrc" ]; then
       echo "${root}/.nvmrc"
       exit
     fi
@@ -71,10 +73,8 @@ version_from_nvmrc() {
 DIR="$(get_script_dir)"
 SEMVER="$DIR/../node_modules/sh-semver/semver.sh"
 
-if should_find_in_nvmrc; then
-  NVMRC_PATH=$(find_nvmrc_path "$PWD")
+NVMRC_PATH=$(find_nvmrc_path "$PWD")
 
-  if [ -e "$NVMRC_PATH" ]; then
-    version_from_nvmrc
-  fi
+if [ -e "$NVMRC_PATH" ]; then
+  version_from_nvmrc
 fi
