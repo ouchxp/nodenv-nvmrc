@@ -31,6 +31,12 @@ $ brew install nodenv-nvmrc
 
 Once you've installed the plugin you can verify that it's working by `cd`ing into a project that has a `.nvmrc` file and does not have a `.node-version` file.  From anywhere in the project's tree, run `nodenv which node`.
 
+## Gotcha
+
+Due to the limitaion of nodenv's plugin system, some commands were not reading the version from `.nvmrc`.
+- `nodenv install` without version is not able to install new Node version specified in `.nvmrc`.
+- `nodenv local` without version is not able to retrieve the version specified in `.nvmrc`
+
 ## Contributing
 
 To run tests, install [bats](https://github.com/sstephenson/bats) and [nodenv](https://github.com/nodenv/nodenv), then run `bats test`  in the base directory of this plugin
