@@ -58,7 +58,7 @@ version_from_nvmrc() {
       if [[ $v =~ ^[0-9.]+$ ]] ; then
         installed_versions+=( "$v" )
       fi
-    done < <(nodenv versions --bare)
+    done < <(nodenv versions --bare --skip-aliases)
 
     version=$("$SEMVER" -r "$version_expression" "${installed_versions[@]}" \
       | tail -n 1)
